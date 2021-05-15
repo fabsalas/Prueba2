@@ -20,35 +20,33 @@
                                     <div class="section text-center">
                                             <!--Sign up-->
                                             <br>
-                                            <h3 class="mb-4 pb-3">Sign up</h3>
+                                            <h3 class="mb-4 pb-3">Sign in</h3>
+                                            <img src="../img/user-login.png">
                                             <div class="form-group col-md-8">
                                                 <label for="Usuario">Usuario</label>
                                                 <input type="text" id="Usuario" class="form-control" placeholder="Ingrese Usuario">
-                                                <i class="input-icon uil uil-user"></i>
+                                                
                                                 <div id=errorusuario class="alert alert-danger" role="alert"></div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="email">Email</label>
                                                 <input type="text" id="email" class="form-control" placeholder="nombreemail@email.com">
-                                                <i class="input-icon uil uil-at"></i>
+                                                
                                                 <div id=erroremail class="alert alert-danger" role="alert"></div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
                                                 <input type="text" id="contraseña" class="form-control" placeholder="Ingresa Contraseña">
-                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                
                                                 <div id=errorcontra class="alert alert-danger" role="alert"></div>
                                             </div>
-                                            <div class="form-group col-md-8">
-                                                <label for="contraseña">Repita Contraseña</label>
-                                                <input type="text" id="repcontraseña" class="form-control" placeholder="Repita Contraseña">
-                                                <i class="input-icon uil uil-lock-alt"></i>
-                                                <div id=errorcontra2 class="alert alert-danger" role="alert"></div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Validar</button>
+                                           
+                                           
+                                            <button type="submit" class="btn btn-primary">Ingresar</button>
                                             <br>
-                                            
                                             <button type="reset" class="btn btn-danger">Limpiar</button>
+                                            <br>
+                                            <a href="Signup.html"><p>Registrate</p></a>
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +82,7 @@
         $("#erroremail").hide();
         //error de Contraseña
         $("#errorcontra").hide();
-        //error de repetir contraseña
-        $("#errorcontra2").hide();
+       
 
         $("#formulario").submit(function(){
 

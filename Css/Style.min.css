@@ -8,7 +8,10 @@ body{
     background-color:#12f8ad;
 	overflow-x: hidden;
 }
-a { cursor: pointer; transition: all 200ms linear; }
+img {
+    height:14%;
+    width:14%;
+}
 
 a:hover { text-decoration: none; }
 
@@ -21,7 +24,7 @@ a:hover { text-decoration: none; }
 h3 { font-weight: 600; }
 
 h5 span{
-    padding: 0 50px;
+    padding: 0 20%;
     text-transform: uppercase;
     font-weight: 700;
 
@@ -36,8 +39,8 @@ h5 span{
     display: block;
     width: 100%;
     padding: 0.5%;
-    border-radius: 4px;
-    margin-left: 15%;
+    border-radius: 4%;
+    margin-left: 17%;
 
 
  
@@ -49,10 +52,10 @@ h5 span{
     height: 100%;
     width: 100%;
     font-weight: 500;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 6%;
+    font-size: 85%;
     line-height: 22%;
-    letter-spacing: 0.5px;
+    letter-spacing: 1%;
     outline: none;
     color: #c4c3ca;
     background-color: #1f2029;
@@ -65,9 +68,15 @@ h5 span{
 
 
 
-.btn:hover{  
-  background-color: #fff;
-  color:#12f8ad;
+.btn-primary:hover{  
+  background-color: rgb(255, 255, 255);
+  color:#3427ee;
   box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
 }
 
+.btn-danger:hover{  
+    background-color: rgb(255, 255, 255);
+    color:#df414e;
+    box-shadow: 0 8px 24px 0 rgba(68, 3, 3, 0.603);
+  }
+  
