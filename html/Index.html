@@ -9,59 +9,63 @@
     <title>Indice</title>
 </head>
 <body> 
-    <div class="section" id="seccion">
+    <div class="form" id="formulario">
         <div class="container">
-            <div class="row full-height justify-content-center">
+            <div class="row full height justify-content-center">
                 <div class="col-12 text-center align-self-center py-5">
-                    <div class="section pb-5 pt-5 pt-sm text-center">
-                        <h5 class="mb-0 pb-3"><span>Sing up</span><span>Sign in</span></h5>
-                        <input class="checkbox" type="checkbox" id="reg-log" />
-                        <label for="reg-log"></label>
-                        <div class="card-3d-wrap mx-auto">
-                            <div class="card-front">
-                                <div class="center-wrap">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                            
+                            <div class="card-body" >
+                                <div class="card" style="background-color: black;">
                                     <div class="section text-center">
-                                        <!--Sign up-->
-                                        <h3 class="mb-4 pb-3">Sign up</h3>
-                                        <div class="form-group">
-                                            <label for="Usuario">Usuario</label>
-                                            <input type="text" id="Usuario" class="form-control" placeholder="Ingrese Usuario">
-                                            <i class="input-icon uil uil-user"></i>
-                                            <div id=errorusuario class="alert alert-danger" role="alert"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="text" id="email" class="form-control" placeholder="nombreemail@email.com">
-                                            <i class="input-icon uil uil-at"></i>
-                                            <div id=erroremail class="alert alert-danger" role="alert"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contraseña">Contraseña</label>
-                                            <input type="text" id="contraseña" class="form-control" placeholder="Ingresa Contraseña">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                            <div id=errorcontra class="alert alert-danger" role="alert"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contraseña">Repite Contraseña</label>
-                                            <input type="text" id="repcontraseña" class="form-control" placeholder="Repita Contraseña">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                            <div id=errorcontra2 class="alert alert-danger" role="alert"></div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Validar</button>
-                                        <br>
-                                        <br>
-                                        <button type="reset" class="btn btn-danger">Limpiar</button>
-
-
+                                            <!--Sign up-->
+                                            <br>
+                                            <h3 class="mb-4 pb-3">Sign up</h3>
+                                            <div class="form-group col-md-8">
+                                                <label for="Usuario">Usuario</label>
+                                                <input type="text" id="Usuario" class="form-control" placeholder="Ingrese Usuario">
+                                                <i class="input-icon uil uil-user"></i>
+                                                <div id=errorusuario class="alert alert-danger" role="alert"></div>
+                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <label for="email">Email</label>
+                                                <input type="text" id="email" class="form-control" placeholder="nombreemail@email.com">
+                                                <i class="input-icon uil uil-at"></i>
+                                                <div id=erroremail class="alert alert-danger" role="alert"></div>
+                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <label for="contraseña">Contraseña</label>
+                                                <input type="text" id="contraseña" class="form-control" placeholder="Ingresa Contraseña">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                <div id=errorcontra class="alert alert-danger" role="alert"></div>
+                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <label for="contraseña">Repita Contraseña</label>
+                                                <input type="text" id="repcontraseña" class="form-control" placeholder="Repita Contraseña">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                <div id=errorcontra2 class="alert alert-danger" role="alert"></div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Validar</button>
+                                            <br>
+                                            
+                                            <button type="reset" class="btn btn-danger">Limpiar</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
+
+
+                    
+                
+            
+                
+      
+ 
+
 
 
 
@@ -70,5 +74,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+    <!--jquery-->
+    <script type="text/javascript">
+    $(document).ready(function(){
+        //error de usuario
+        $("#errorusuario").hide();
+        //error de email
+        $("#erroremail").hide();
+        //error de Contraseña
+        $("#errorcontra").hide();
+        //error de repetir contraseña
+        $("#errorcontra2").hide();
+
+        $("#formulario").submit(function(){
+
+
+        })
+
+
+    })
+    </script>
+    
+
+
+    
+
+
 </body>
 </html>

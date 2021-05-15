@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 200%;
+	font-size: 130%;
+	line-height: 2.3;
+	color: #f8f8f8;
+    background-color:#12f8ad;
+	overflow-x: hidden;
+}
+a { cursor: pointer; transition: all 200ms linear; }
+
+a:hover { text-decoration: none; }
+
+.link { color: #fff; }
+
+.link:hover { color: #12f8ad; }
+
+
+
+h3 { font-weight: 600; }
+
+h5 span{
+    padding: 0 50px;
+    text-transform: uppercase;
+    font-weight: 700;
+
+}
+.card-body{ 
+    position: relative;
+    width:88%;
+    background-color: rgb(54, 59, 55);
+}
+.form-group{ 
+    position:relative;
+    display: block;
+    width: 100%;
+    padding: 0.5%;
+    border-radius: 4px;
+    margin-left: 15%;
+
+
+ 
+   
+}
+.form-control {
+    padding: 2% 5%;
+    padding-left: 2%;
+    height: 100%;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 22%;
+    letter-spacing: 0.5px;
+    outline: none;
+    color: #c4c3ca;
+    background-color: #1f2029;
+    border: none;
+    transition: all 100ms linear;
+    box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+
+
+
+
+
+.btn:hover{  
+  background-color: #fff;
+  color:#12f8ad;
+  box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}
+
