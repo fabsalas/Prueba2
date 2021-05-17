@@ -27,6 +27,7 @@
                                                 <label for="usuario">Usuario</label>
                                                 <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
                                                 <div id="errorusuario" class="alert alert-danger" role="alert"></div>
+                                                <div id="errorusuarioc" class="alert alert-danger" role="alert"></div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="email">Email</label>
@@ -46,7 +47,8 @@
                                                 
                                                 <div id="errorcontra2" class="alert alert-danger" role="alert"></div>
                                             </div>
-                                            <button type="submit"  class="btn btn-primary">Validar</button>
+                                            <button type="submit"  id="bvalidar" class="btn btn-primary">Validar</button>
+                                            <button type="Success" id="bregistrar" class="btn btn-success">Registrar</button>
                                             <br>
                                             <button type="reset" class="btn btn-danger">Limpiar</button>
                                             <br>
@@ -67,9 +69,30 @@
     <!--jquery-->
     <script type="text/javascript">
         $(document).ready(function(){
-            console.log("")
+         
+            var form = new FormData();
+                form.append("username", "duoc");
+                form.append("email", "n.riverav@profesor.duoc.cl");
+                form.append("password1", "1234");
+                form.append("password2", "1234");
+
+                var settings = {
+                    "url": "http://nriverv.pythonanywhere.com/api/v1/validation/all/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": form
+                };
+
+                $.ajax(settings).done(function (response) {
+                     console.log(response);
+                });
+                       
                 //error de usuario
                 $('#errorusuario').hide();
+                $('#errorusuarioc').hide();
                 //error de email
                 $("#erroremail").hide();
                 //error de Contraseña
@@ -77,22 +100,34 @@
                 //error de repetir contraseña
                 $("#errorcontra2").hide();
 
+                $("#bregistrar").hide();
+
                 $('#formulario').submit(function() {
 
                     var mensaje= "";
+                    var cantidad = "";
                     var mensaje2 = "";
                     var mensaje3 = "";
                     var mensaje4 = "";
-
-                    if ($('#usuario').val().trim().length>=4 || $('#usuario').val().trim().length<=16) {
-                        mensaje="Usuario debe tener entre 4 a 16 caracteres";
+                    var registar="";
+                    
+                    //validacion usuario no sea blanco
+                    if ($('#usuario').val().trim().length==0) {
+                        mensaje="Usuario esta en blanco";
+                    }else if ($('#usuario').val().trim()){
+                        cantidad="usuario debe tener entre 4 a 16 caracteres";
+                    
                     }
                     if(mensaje !=""){
                         $('#errorusuario').html(mensaje);
                         $('#errorusuario').show();
                         //console.log(mensaje);
                         event.preventDefault();
-                    }
+                    }/*else {(cantidad < 3 && cantidad > 17)
+                        $('#errorusuarioc').html(cantidad);
+                        $('#errorusuarioc').show();
+                        event.preventDefault();
+                    }*/
 
                     if ($('#email').val().trim().length==0) {
                         mensaje2="email esta en blanco";
@@ -106,7 +141,7 @@
                     }
 
                     
-                    if ($('#contrasena').val().trim().length>=8 || $('#contrasena').val().trim().length<=16) {
+                    if ($('#contrasena').val().trim().length==0) {
                         mensaje3=" contraseña debe tener entre 8 a 16 caracteres";
 
                     }
@@ -126,10 +161,18 @@
                         $('#errorcontra2').show();
                         //console.log(mensaje);
                         event.preventDefault();
+                    }else {$("#bvalidar").click(function(){
+                            $(this).hide();
+                            $("#bregistrar").show(); 
+                            event.preventDefault();
+                             
+                        });
                     }
-                
-                
-             
+                        
+                        
+                       
+              
+                            
            
       
 
