@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 body{
 	font-family: 'Poppins', sans-serif;
-	font-weight: 200%;
+
 	font-size: 130%;
 	line-height: 2.3;
 	color: #f8f8f8;
@@ -46,6 +46,7 @@ h5 span{
  
    
 }
+
 .form-control {
     padding: 2% 5%;
     padding-left: 2%;
