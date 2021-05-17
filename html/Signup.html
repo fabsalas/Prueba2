@@ -26,7 +26,6 @@
                                             <div class="form-group col-md-8">
                                                 <label for="usuario">Usuario</label>
                                                 <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
-                                               
                                                 <div id="errorusuario" class="alert alert-danger" role="alert"></div>
                                             </div>
                                             <div class="form-group col-md-8">
@@ -37,17 +36,17 @@
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
-                                                <input type="password" id="contraseña" class="form-control" placeholder="Ingresa Contraseña">
+                                                <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
                                                
                                                 <div id="errorcontra" class="alert alert-danger" role="alert"></div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Repita Contraseña</label>
-                                                <input type="password" id="repcontraseña" class="form-control" placeholder="Repita Contraseña">
+                                                <input type="password" id="repcontrasena" class="form-control" placeholder="Repita Contraseña">
                                                 
                                                 <div id="errorcontra2" class="alert alert-danger" role="alert"></div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Validar</button>
+                                            <button type="submit"  class="btn btn-primary">Validar</button>
                                             <br>
                                             <button type="reset" class="btn btn-danger">Limpiar</button>
                                             <br>
@@ -67,36 +66,81 @@
 
     <!--jquery-->
     <script type="text/javascript">
-    $(document).ready(function(){
+        $(document).ready(function(){
+            console.log("")
+                //error de usuario
+                $('#errorusuario').hide();
+                //error de email
+                $("#erroremail").hide();
+                //error de Contraseña
+                $("#errorcontra").hide();
+                //error de repetir contraseña
+                $("#errorcontra2").hide();
 
-        //error de usuario
-        $('#errorusuario').hide();
-        //error de email
-        $("#erroremail").hide();
-        //error de Contraseña
-        $("#errorcontra").hide();
-        //error de repetir contraseña
-        $("#errorcontra2").hide();
+                $('#formulario').submit(function() {
 
-        $("#formulario").submit(function(){
+                    var mensaje= "";
+                    var mensaje2 = "";
+                    var mensaje3 = "";
+                    var mensaje4 = "";
 
-            var mensaje =""; //Aqui gurdaremos el mensaje de error de cada casilla 
+                    if ($('#usuario').val().trim().length>=4 || $('#usuario').val().trim().length<=16) {
+                        mensaje="Usuario debe tener entre 4 a 16 caracteres";
+                    }
+                    if(mensaje !=""){
+                        $('#errorusuario').html(mensaje);
+                        $('#errorusuario').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
 
-            if ($("#usuario").val().trim().lenght==0){
-                mensaje = "El nombre de usuario debe tener entre 4 a 16 caracteres";
+                    if ($('#email').val().trim().length==0) {
+                        mensaje2="email esta en blanco";
 
-            }
+                    }
+                    if(mensaje2 !=""){
+                        $('#erroremail').html(mensaje2);
+                        $('#erroremail').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
 
-            if (mensaje !=""){
-                $('errorusuario').html(mensaje);
-                $('errorusuario').show();
-                event.preventDefault();
-            }
+                    
+                    if ($('#contrasena').val().trim().length>=8 || $('#contrasena').val().trim().length<=16) {
+                        mensaje3=" contraseña debe tener entre 8 a 16 caracteres";
 
-        });
+                    }
+                    if(mensaje3 !=""){
+                        $('#errorcontra').html(mensaje3);
+                        $('#errorcontra').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
+
+                    if ($('#repcontrasena').val().trim().length==0) {
+                        mensaje4=" repita contraseña esta en blanco";
+
+                    }
+                    if(mensaje4 !=""){
+                        $('#errorcontra2').html(mensaje4);
+                        $('#errorcontra2').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
+                
+                
+             
+           
+      
+
+       
+
+                
+
+            });
 
 
-    })
+        })
     </script>
     
 </body>

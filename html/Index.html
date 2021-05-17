@@ -27,7 +27,7 @@
                                             <img src="../img/user-login.png">
                                             <div class="form-group col-md-8">
                                                 <label for="Usuario">Usuario</label>
-                                                <input type="text" id="Usuario" class="form-control" placeholder="Ingrese Usuario">
+                                                <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
                                                 
                                                 <div id="errorusuario" class="alert alert-danger" role="alert"></div>
                                             </div>
@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
-                                                <input type="password" id="contraseña" class="form-control" placeholder="Ingresa Contraseña">
+                                                <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
                                                 
                                                 <div id="errorcontra" class="alert alert-danger" role="alert"></div>
                                             </div>
@@ -80,12 +80,52 @@
         $("#erroremail").hide();
         //error de Contraseña
         $("#errorcontra").hide();
-       
 
-        $("#formulario").submit(function(){
+        $('#formulario').submit(function(){
+            
+
+            var mensaje ="";
+            var mensaje2 = "";
+            var mensaje3 = "";
+         
+
+                    if ($('#usuario').val().trim().length>=4 || $('#usuario').val().trim().length<=16) {
+                        mensaje="Usuario debe tener entre 4 a 16 caracteres";
+                    }
+                    if(mensaje !=""){
+                        $('#errorusuario').html(mensaje);
+                        $('#errorusuario').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
+
+                    if ($('#email').val().trim().length==0) {
+                        mensaje2="email esta en blanco";
+
+                    }
+                    if(mensaje2 !=""){
+                        $('#erroremail').html(mensaje2);
+                        $('#erroremail').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
+
+                    
+                    if ($('#contrasena').val().trim().length>=8 || $('#contrasena').val().trim().length<=16) {
+                        mensaje3=" contraseña debe tener entre 8 a 16 caracteres";
+
+                    }
+                    if(mensaje3 !=""){
+                        $('#errorcontra').html(mensaje3);
+                        $('#errorcontra').show();
+                        //console.log(mensaje);
+                        event.preventDefault();
+                    }
 
 
-        })
+
+
+        });
 
 
     })
