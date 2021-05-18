@@ -26,20 +26,21 @@
                                             <div class="form-group col-md-8">
                                                 <label for="usuario">Usuario</label>
                                                 <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
-                                                <div id="errorusuario" class="alert alert-danger" role="alert"></div>
-                                                <div id="errorusuarioc" class="alert alert-danger" role="alert"></div>
+                                                <div id="errorusuario1" class="alert alert-danger" role="alert" style="font-size:60%">Usuario esta en blanco</div>
+                                                <div id="errorusuario2" class="alert alert-danger" role="alert" style="font-size:60%">El nombre del usuario debe tener entre 4 a 16 caracteres</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="email">Email</label>
-                                                <input type="text" id="email" class="form-control" placeholder="nombreemail@email.com">
+                                                <input type="email" id="email" class="form-control" placeholder="nombreemail@email.com">
                                                 
-                                                <div id="erroremail" class="alert alert-danger" role="alert"></div>
+                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">El correo esta ocupado</div>
+                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">Formato de correo incorrecto</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
                                                 <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
                                                
-                                                <div id="errorcontra" class="alert alert-danger" role="alert"></div>
+                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña debe tener entre 8 y 16 caracteres</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Repita Contraseña</label>
@@ -47,10 +48,10 @@
                                                 
                                                 <div id="errorcontra2" class="alert alert-danger" role="alert"></div>
                                             </div>
-                                            <button type="submit"  id="bvalidar" class="btn btn-primary">Validar</button>
-                                            <button type="Success" id="bregistrar" class="btn btn-success">Registrar</button>
+                                            <button type="submit"  id="btn-validar" class="btn btn-primary">Validar</button>
+                                            <button type="Success" id="btn-registrar" class="btn btn-success">Registrar</button>
                                             <br>
-                                            <button type="reset" class="btn btn-danger">Limpiar</button>
+                                            <button type="reset"id="btn-limpiar"  class="btn btn-danger">Limpiar</button>
                                             <br>
                                             <a href="Index.html"><p>Volver</p></a>
                                     </div>
@@ -69,30 +70,9 @@
     <!--jquery-->
     <script type="text/javascript">
         $(document).ready(function(){
-         
-            var form = new FormData();
-                form.append("username", "duoc");
-                form.append("email", "n.riverav@profesor.duoc.cl");
-                form.append("password1", "1234");
-                form.append("password2", "1234");
-
-                var settings = {
-                    "url": "http://nriverv.pythonanywhere.com/api/v1/validation/all/",
-                    "method": "POST",
-                    "timeout": 0,
-                    "processData": false,
-                    "mimeType": "multipart/form-data",
-                    "contentType": false,
-                    "data": form
-                };
-
-                $.ajax(settings).done(function (response) {
-                     console.log(response);
-                });
-                       
                 //error de usuario
                 $('#errorusuario').hide();
-                $('#errorusuarioc').hide();
+                $('#errorusuario').hide();
                 //error de email
                 $("#erroremail").hide();
                 //error de Contraseña
@@ -100,87 +80,12 @@
                 //error de repetir contraseña
                 $("#errorcontra2").hide();
 
-                $("#bregistrar").hide();
+                $("#btn-validar").click(function(){
+                event.preventDefault();
 
-                $('#formulario').submit(function() {
+                var usuario = $('#usuario').val().trim();
 
-                    var mensaje= "";
-                    var cantidad = "";
-                    var mensaje2 = "";
-                    var mensaje3 = "";
-                    var mensaje4 = "";
-                    var registar="";
-                    
-                    //validacion usuario no sea blanco
-                    if ($('#usuario').val().trim().length==0) {
-                        mensaje="Usuario esta en blanco";
-                    }else if ($('#usuario').val().trim()){
-                        cantidad="usuario debe tener entre 4 a 16 caracteres";
-                    
-                    }
-                    if(mensaje !=""){
-                        $('#errorusuario').html(mensaje);
-                        $('#errorusuario').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }/*else {(cantidad < 3 && cantidad > 17)
-                        $('#errorusuarioc').html(cantidad);
-                        $('#errorusuarioc').show();
-                        event.preventDefault();
-                    }*/
-
-                    if ($('#email').val().trim().length==0) {
-                        mensaje2="email esta en blanco";
-
-                    }
-                    if(mensaje2 !=""){
-                        $('#erroremail').html(mensaje2);
-                        $('#erroremail').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }
-
-                    
-                    if ($('#contrasena').val().trim().length==0) {
-                        mensaje3=" contraseña debe tener entre 8 a 16 caracteres";
-
-                    }
-                    if(mensaje3 !=""){
-                        $('#errorcontra').html(mensaje3);
-                        $('#errorcontra').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }
-
-                    if ($('#repcontrasena').val().trim().length==0) {
-                        mensaje4=" repita contraseña esta en blanco";
-
-                    }
-                    if(mensaje4 !=""){
-                        $('#errorcontra2').html(mensaje4);
-                        $('#errorcontra2').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }else {$("#bvalidar").click(function(){
-                            $(this).hide();
-                            $("#bregistrar").show(); 
-                            event.preventDefault();
-                             
-                        });
-                    }
-                        
-                        
-                       
-              
-                            
-           
-      
-
-       
-
-                
-
-            });
+                });
 
 
         })

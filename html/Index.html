@@ -28,26 +28,27 @@
                                             <div class="form-group col-md-8">
                                                 <label for="Usuario">Usuario</label>
                                                 <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
-                                                
-                                                <div id="errorusuario" class="alert alert-danger" role="alert"></div>
+                                                <div id="errorusuario1" class="alert alert-danger" role="alert" style="font-size:60%">Usuario en blanco</div>
+                                                <div id="errorusuario2" class="alert alert-danger" role="alert" style="font-size:60%">El nombre de usuario debe tener entre 4 a 16 caracteres</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="email">Email</label>
-                                                <input type="text" id="email" class="form-control" placeholder="nombreemail@email.com">
+                                                <input type="email" id="email" class="form-control" placeholder="nombreemail@email.com">
                                                 
-                                                <div id="erroremail" class="alert alert-danger" role="alert"></div>
+                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">El email no coincide</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
                                                 <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
                                                 
-                                                <div id="errorcontra" class="alert alert-danger" role="alert"></div>
+                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña no esta registrada</div>
+                                                <div id="errorcontra1" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña debe tener entre 8 a 16 caracteres</div>
                                             </div>
                                            
                                            
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                            <button type="submit" class="btn btn-primary" id="btn-enviar">Enviar</button>
                                             <br>
-                                            <button type="reset" class="btn btn-danger">Limpiar</button>
+                                            <button type="reset" class="btn btn-danger" id="btn-limpiar">Limpiar</button>
                                             <br>
                                             <a href="Signup.html"><p>Registrate</p></a>
                                     </div>
@@ -75,57 +76,45 @@
     <script type="text/javascript">
     $(document).ready(function(){
         //error de usuario
-        $("#errorusuario").hide();
+        $("#errorusuario1").hide();
+        $("#errorusuario2").hide();
         //error de email
         $("#erroremail").hide();
         //error de Contraseña
         $("#errorcontra").hide();
+        $("#errorcontra1").hide();
 
-        $('#formulario').submit(function(){
-            
 
-            var mensaje ="";
-            var mensaje2 = "";
-            var mensaje3 = "";
+            $("#btn-enviar").click(function(){
+                event.preventDefault();
+
+                var usuario= $('#usuario').val().trim();
+                //console.log('usuario: ', usuario);
+
+                //validacion de error usuario en blanco
+                if(usuario.length === 0 ){
+                    $('#errorusuario1').show();
+
+                }
+                //validacion de error usuario debe ser entre 4 a 16 caracteres
+                if(!(usuario.length >=4 && usuario.length <=16)){
+                    $('#errorusuario2').show();
+                }
+                //boton limpiar quita oculta los mensajes de error
+                $('#btn-limpiar').click(function(){
+                    $("#errorusuario1").hide();
+                    $('#errorusuario2').hide();
+                    $("#erroremail").hide();
+                    $("#errorcontra").hide();
+                    $("#errorcontra1").hide();
+                })
+
+            })
+
          
 
-                    if ($('#usuario').val().trim().length>=4 || $('#usuario').val().trim().length<=16) {
-                        mensaje="Usuario debe tener entre 4 a 16 caracteres";
-                    }
-                    if(mensaje !=""){
-                        $('#errorusuario').html(mensaje);
-                        $('#errorusuario').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }
 
-                    if ($('#email').val().trim().length==0) {
-                        mensaje2="email esta en blanco";
-
-                    }
-                    if(mensaje2 !=""){
-                        $('#erroremail').html(mensaje2);
-                        $('#erroremail').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }
-
-                    
-                    if ($('#contrasena').val().trim().length>=8 || $('#contrasena').val().trim().length<=16) {
-                        mensaje3=" contraseña debe tener entre 8 a 16 caracteres";
-
-                    }
-                    if(mensaje3 !=""){
-                        $('#errorcontra').html(mensaje3);
-                        $('#errorcontra').show();
-                        //console.log(mensaje);
-                        event.preventDefault();
-                    }
-
-
-
-
-        });
+     
 
 
     })
