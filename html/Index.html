@@ -31,14 +31,15 @@
                                                 <!--Errores-->
                                                 <div id="errorusuario1" class="alert alert-danger" role="alert" style="font-size:60%">Usuario en blanco</div>
                                                 <div id="errorusuario2" class="alert alert-danger" role="alert" style="font-size:60%">El nombre de usuario debe tener entre 4 a 16 caracteres</div>
+                                                <div id="errorusuario3" class="alert alert-danger" role="alert" style="font-size:60%">Usuario no Existe</div>
                                             </div>
                                         
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
                                                 <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
                                                 
-                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña no esta registrada</div>
-                                                <div id="errorcontra1" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña debe tener entre 8 a 16 caracteres</div>
+                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña en blanco</div>
+                                                <div id="errorcontra1" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña incorrecta</div>
                                             </div>
                                            
                                            
@@ -74,6 +75,7 @@
         //error de usuario
         $("#errorusuario1").hide();
         $("#errorusuario2").hide();
+        $('#errorusuario3').hide();
 
         //error de Contraseña
         $("#errorcontra").hide();
@@ -96,17 +98,49 @@
                     $('#errorusuario2').show();
                 }
 
-             
+                //validar contraseña 
+                var contra = $('#usuario').val().trim();
+
+                if(contra.length===0){
+                    $("#errorcontra").hide();
+                }
+
+                var form = new FormData();
+                form.append("username", usuario);
+                form.append("password", contra);
+
+                var settings = {
+                "url": "http://nriverv.pythonanywhere.com/api/v1/signin/",
+                "method": "POST",
+                
+                "headers": {
+                },
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+                };
+
+                $.ajax(settings).done(function (response) {
+                    var resp_json = JSON.parse(response);
+                    if(resp_json.errorUsername) {
+                        $("#errorcontra1").show();
+                    }else {
+                        $("#errorcontra1").hide();
+                    }
+                });
 
 
                 //boton limpiar quita oculta los mensajes de error
                 $('#btn-limpiar').click(function(){
                     $("#errorusuario1").hide();
                     $('#errorusuario2').hide();
-                    $("#erroremail").hide();
+                    $('#errorusuario3').hide();
                     $("#errorcontra").hide();
                     $("#errorcontra1").hide();
                 })
+                //encargado de cambiar de ventana
+                window.location='Home.html';
 
             })
 
