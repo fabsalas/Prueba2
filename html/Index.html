@@ -41,6 +41,8 @@
                                                 <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña en blanco</div>
                                                 <div id="errorcontra1" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña incorrecta</div>
                                             </div>
+
+                                            <div id="erroringreso" class="alert alert-danger" role="alert" style="font-size:90%">Usuario y/o contraseña incorrecta</div>
                                            
                                            
                                             <button type="submit" class="btn btn-primary" id="btn-enviar">Enviar</button>
@@ -81,68 +83,84 @@
         $("#errorcontra").hide();
         $("#errorcontra1").hide();
 
+        $('#erroringreso').hide();
+
 
             $("#btn-enviar").click(function(){
-                event.preventDefault();
+                    event.preventDefault();
 
-                var usuario= $('#usuario').val().trim();
-                //console.log('usuario: ', usuario);
+                    var usuario= $('#usuario').val().trim();
+                    //console.log('usuario: ', usuario);
 
-                //validacion de error usuario en blanco
-                if(usuario.length === 0 ){
-                    $('#errorusuario1').show();
+                    //validacion de error usuario en blanco
+                        if(usuario.length === 0 ){
+                            $('#errorusuario1').show();
 
-                }
-                //validacion de error usuario debe ser entre 4 a 16 caracteres
-                if(!(usuario.length >=4 && usuario.length <=16)){
-                    $('#errorusuario2').show();
-                }
-
-                //validar contraseña 
-                var contra = $('#usuario').val().trim();
-
-                if(contra.length===0){
-                    $("#errorcontra").hide();
-                }
-
-                var form = new FormData();
-                form.append("username", usuario);
-                form.append("password", contra);
-
-                var settings = {
-                "url": "http://nriverv.pythonanywhere.com/api/v1/signin/",
-                "method": "POST",
-                
-                "headers": {
-                },
-                "processData": false,
-                "mimeType": "multipart/form-data",
-                "contentType": false,
-                "data": form
-                };
-
-                $.ajax(settings).done(function (response) {
-                    var resp_json = JSON.parse(response);
-                    if(resp_json.errorUsername) {
-                        $("#errorcontra1").show();
-                    }else {
-                        $("#errorcontra1").hide();
+                        }
+                    //validacion de error usuario debe ser entre 4 a 16 caracteres
+                    if(!(usuario.length >=4 && usuario.length <=16)){
+                        $('#errorusuario2').show();
                     }
-                });
 
+                    //validar contraseña 
+                    var contra = $('#contrasena').val().trim();
 
-                //boton limpiar quita oculta los mensajes de error
+                    if(contra.length===0){
+                        $("#errorcontra").show();
+                    }
+
+                   
+                   
+
+                    
+                    var form = new FormData();
+                    form.append("username", usuario);
+                    form.append("password", contra);
+
+                    var settings = {
+                    "url": "http://nriverv.pythonanywhere.com/api/v1/signin/",
+                    "method": "POST",
+                    
+                    "headers": {
+                    },
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": form
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                        var resp_json = JSON.parse(response);
+                        if(resp_json.errorUsername) {
+                            $("#errorcontra1").show();
+                        }else {
+                            $("#errorcontra1").hide();
+                            window.location='Home.html';
+                        }
+                            console.log(response);
+                       
+
+                    }).fail(function(){
+                    //Error usuario y contraseña incorrecta
+                    $('#erroringreso').show();
+                    })
+                    //boton limpiar quita oculta los mensajes de error
                 $('#btn-limpiar').click(function(){
                     $("#errorusuario1").hide();
                     $('#errorusuario2').hide();
                     $('#errorusuario3').hide();
                     $("#errorcontra").hide();
                     $("#errorcontra1").hide();
-                })
-                //encargado de cambiar de ventana
-                window.location='Home.html';
+                    $('#erroringreso').hide();
 
+
+                })
+
+
+            
             })
+               
 
          
 
