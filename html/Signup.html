@@ -26,27 +26,32 @@
                                             <div class="form-group col-md-8">
                                                 <label for="usuario">Usuario</label>
                                                 <input type="text" id="usuario" class="form-control" placeholder="Ingrese Usuario">
+                                                <!--Errores de usuario-->
                                                 <div id="errorusuario1" class="alert alert-danger" role="alert" style="font-size:60%">Usuario esta en blanco</div>
                                                 <div id="errorusuario2" class="alert alert-danger" role="alert" style="font-size:60%">El nombre del usuario debe tener entre 4 a 16 caracteres</div>
+                                                <div id="errorusuario3" class="alert alert-danger" role="alert" style="font-size:60%">Usuario ya existente</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="email">Email</label>
                                                 <input type="email" id="email" class="form-control" placeholder="nombreemail@email.com">
-                                                
-                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">El correo esta ocupado</div>
-                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">Formato de correo incorrecto</div>
+                                                <!--Errores de email-->
+                                                <div id="erroremail" class="alert alert-danger" role="alert" style="font-size:60%">Correo en blanco</div>
+                                                <div id="erroremail-1" class="alert alert-danger" role="alert" style="font-size:60%">Correo ya existente</div>
+                                                <div id="erroremail-2" class="alert alert-danger" role="alert" style="font-size:60%">Formato de correo incorrecto</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Contraseña</label>
                                                 <input type="password" id="contrasena" class="form-control" placeholder="Ingresa Contraseña">
-                                               
-                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña debe tener entre 8 y 16 caracteres</div>
+                                                <!--Error de contraseña-->
+                                                <div id="errorcontra" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña en blanco</div>
+                                                <div id="errorcontra-1" class="alert alert-danger" role="alert" style="font-size:60%">La contraseña debe tener entre 8 y 16 caracteres</div>
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="contraseña">Repita Contraseña</label>
                                                 <input type="password" id="repcontrasena" class="form-control" placeholder="Repita Contraseña">
-                                                
-                                                <div id="errorcontra2" class="alert alert-danger" role="alert"></div>
+                                                <!--Error de repeticiones de contraseña-->
+                                                <div id="error-rep-contra" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña en blanco</div>
+                                                <div id="error-rep-contra-1" class="alert alert-danger" role="alert" style="font-size:60%">Contraseña no coinciden</div>
                                             </div>
                                             <button type="submit"  id="btn-validar" class="btn btn-primary">Validar</button>
                                             <button type="Success" id="btn-registrar" class="btn btn-success">Registrar</button>
@@ -71,24 +76,194 @@
     <script type="text/javascript">
         $(document).ready(function(){
                 //error de usuario
-                $('#errorusuario').hide();
-                $('#errorusuario').hide();
+                $('#errorusuario1').hide();
+                $('#errorusuario2').hide();
+                $('#errorusuario3').hide();
                 //error de email
                 $("#erroremail").hide();
+                $("#erroremail-1").hide();
+                $("#erroremail-2").hide();
                 //error de Contraseña
                 $("#errorcontra").hide();
+                $("#errorcontra-1").hide();
                 //error de repetir contraseña
-                $("#errorcontra2").hide();
+                $("#error-rep-contra").hide();
+                $("#error-rep-contra-1").hide();
+                
+
+                //ocultar boton Registrar
+                $('#btn-registrar').hide();
 
                 $("#btn-validar").click(function(){
                 event.preventDefault();
-
+                //validacion de error usuario
                 var usuario = $('#usuario').val().trim();
+
+                if(usuario.length === 0 ){
+                    $('#errorusuario1').show();
+
+                }
+                if(!(usuario.length >=4 && usuario.length <=16)){
+                    $('#errorusuario2').show();
+                }else{
+                    $('#errorusuario2').hide();
+                }
+
+                //validacio de correo 
+              
+                    var correo = $('#email').val().trim();
+
+                    if(correo.length === 0){
+                        $('#erroremail').show();
+                    }
+               
+             
+
+                function validateCorreo($correo){
+                    var correoReg= /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    return correoReg.test($correo);
+                    
+                }
+
+                console.log('correo valido: ',validateCorreo(correo));
+                if(!(correo)){
+                    $('#erroremail-1').show();
+                }else{
+                    $('#erroremail-1').hide();
+                }
+
+
+        
+
+                    //validacion de contraseñas
+                    var contra= $('#contrasena').val().trim();
+
+                    if(contra.length === 0){
+                        $("#errorcontra").show();
+                    }
+
+                    if(!(contra.length >=8 && contra.length <=16)){
+                        $('#errorcontra-1').show();
+                        }else{
+                            $('#errorcontra-1').hide();
+                        }
+                   //validacion de repeticion de contraseña
+                    var rep_contra = $('#repcontrasena').val().trim();
+
+                    if(rep_contra.length === 0){
+                        $("#error-rep-contra").show();
+                    }
+
+                   if(!(contra == rep_contra)){
+                    $('#error-rep-contra-1').show();
+                   }
+
+                //ipe de validacion
+                var form = new FormData();
+                form.append("username", usuario);
+                form.append("email", correo);
+                form.append("password1", contra);
+                form.append("password2", rep_contra);
+
+                var settings = {
+                    "url": "http://nriverv.pythonanywhere.com/api/v1/validation/all/",
+                    "method": "POST",
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": form
+                };
+
+                    $.ajax(settings).done(function (response) {
+                     var resp_jason = JSON.parse(response);
+
+                     if(resp_jason.errorUsername) {
+                         $('#errorusuario3').show();
+                     }else{
+                         $('#errorusuario3').hide();
+
+                     }
+
+                    });
+
+                    //apis de Sign up
+                    var form1 = new FormData();
+                        form1.append("username", usuario);
+                        form1.append("email", correo);
+                        form1.append("password", contra);
+
+                        var settings = {
+                        "url": "http://nriverv.pythonanywhere.com/api/v1/signup/",
+                        "method": "POST",
+                        
+                        "processData": false,
+                        "mimeType": "multipart/form-data",
+                        "contentType": false,
+                        "data": form1
+                        };
+
+                        $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        });
+                    //mostrar boton registrar 
+
+                
+
+                    $('#btn-limpiar').click(function(){
+                        $("#errorusuario1").hide();
+                        $('#errorusuario2').hide();
+                        $('#errorusuario3').hide();
+                        $("#erroremail").hide();
+                        $("#erroremail-1").hide();
+                        $("#erroremail-2").hide();
+                        $("#errorcontra").hide();
+                        $("#errorcontra-1").hide();
+                        $("#error-rep-contra").hide();
+                        $('#error-rep-contra-1').hide();
+                         })
+
+                             //ipe de validacion
+                var form = new FormData();
+                form.append("username", usuario);
+                form.append("email", correo);
+                form.append("password1", contra);
+                form.append("password2", rep_contra);
+
+                var settings = {
+                    "url": "http://nriverv.pythonanywhere.com/api/v1/validation/all/",
+                    "method": "POST",
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": form
+                };
+
+                    $.ajax(settings).done(function (response) {
+                     var resp_jason = JSON.parse(response);
+
+                     if(resp_jason.errorUsername) {
+                         $('#errorusuario3').show();
+                     }else{
+                         $('#errorusuario3').hide();
+
+                     }
+
+                     
+
+                     
+
+                    });
+
+                     });
 
                 });
 
+         
 
-        })
+      
+   
+
+       
     </script>
     
 </body>
