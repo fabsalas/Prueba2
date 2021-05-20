@@ -75,6 +75,8 @@
     <!--jquery-->
     <script type="text/javascript">
         $(document).ready(function(){
+                var validar= true;
+                var registrar=true;
                 //error de usuario
                 $('#errorusuario1').hide();
                 $('#errorusuario2').hide();
@@ -92,7 +94,7 @@
                 
 
                 //ocultar boton Registrar
-                $('#btn-registrar').show();
+                $('#btn-registrar').hide();
 
                 $("#btn-validar").click(function(){
                 event.preventDefault();
@@ -101,12 +103,15 @@
 
                 if(usuario.length === 0 ){
                     $('#errorusuario1').show();
-
+                }else{
+                    $('#errorusuario1').hide();
                 }
                 if(!(usuario.length >=4 && usuario.length <=16)){
                     $('#errorusuario2').show();
+                    validar = false;
                 }else{
                     $('#errorusuario2').hide();
+                    validar = true;
                 }
 
                 //validacio de correo 
@@ -115,6 +120,10 @@
 
                     if(correo.length === 0){
                         $('#erroremail').show();
+                        validar = false;
+                    }else{
+                        $('#erroremail').hide();
+                        validar = true;
                     }
                
              
@@ -126,10 +135,9 @@
                 }
 
                 console.log('correo valido: ',validateCorreo(correo));
-                if(!(correo)){
+                if((correo)){
                     $('#erroremail-1').show();
-                }else{
-                    $('#erroremail-1').hide();
+                    validar= false;
                 }
 
 
@@ -140,23 +148,34 @@
 
                     if(contra.length === 0){
                         $("#errorcontra").show();
+                    }else{
+                        $("#errorcontra").hide();
                     }
 
                     if(!(contra.length >=8 && contra.length <=16)){
                         $('#errorcontra-1').show();
+                        validar = false;
                         }else{
                             $('#errorcontra-1').hide();
+                            validar = true;
                         }
                    //validacion de repeticion de contraseña
                     var rep_contra = $('#repcontrasena').val().trim();
 
                     if(rep_contra.length === 0){
                         $("#error-rep-contra").show();
+                    }else{
+                        $("#error-rep-contra").hide();
                     }
 
                    if(!(contra == rep_contra)){
                     $('#error-rep-contra-1').show();
-                   }
+                    validar = false;
+                   }    
+                     
+                    
+                      
+
 
                 //ipe de validacion
                 var form = new FormData();
@@ -172,7 +191,7 @@
                     "mimeType": "multipart/form-data",
                     "contentType": false,
                     "data": form
-                };
+                    };
 
                     $.ajax(settings).done(function (response) {
                      var resp_jason = JSON.parse(response);
@@ -180,13 +199,29 @@
 
                      if(resp_jason.errorUsername) {
                          $('#errorusuario3').show();
+                         validar = false;
                      }else{
                          $('#errorusuario3').hide();
+                         validar = true;
 
                      }
-
+                     
+                      
                     });
+                 
 
+                    if(validar==true){
+                        $('#btn-validar').hide();
+                        $('#btn-registrar').show();
+                    }else{
+                        
+                        $('#btn-registrar').hide();
+                        $('#btn-validar').show();
+                    }
+                    
+                    
+                    $("#btn-registrar").click(function(){
+                     
                     //apis de Sign up
                     var form1 = new FormData();
                         form1.append("username", usuario);
@@ -204,13 +239,15 @@
                         };
 
                         $.ajax(settings).done(function (response) {
-                        console.log(response);
-                        });
-                    //mostrar boton registrar 
+                            console.log(response);
 
-                
+                            
+                        });
+                    });//aqui termina click.()registrar
+
                     //boton limpiar oculta los errores
                     $('#btn-limpiar').click(function(){
+                   
                         $("#errorusuario1").hide();
                         $('#errorusuario2').hide();
                         $('#errorusuario3').hide();
@@ -221,43 +258,27 @@
                         $("#errorcontra-1").hide();
                         $("#error-rep-contra").hide();
                         $('#error-rep-contra-1').hide();
-                         })
+                        });
+                    
 
-                             //ipe de validacion
-                var form = new FormData();
-                form.append("username", usuario);
-                form.append("email", correo);
-                form.append("password1", contra);
-                form.append("password2", rep_contra);
+                
+                  
+                   
+                        
 
-                var settings = {
-                    "url": "http://nriverv.pythonanywhere.com/api/v1/validation/all/",
-                    "method": "POST",
-                    "processData": false,
-                    "mimeType": "multipart/form-data",
-                    "contentType": false,
-                    "data": form
-                };
+                        
+                      
 
-                    $.ajax(settings).done(function (response) {
-                     var resp_jason = JSON.parse(response);
-
-                     if(resp_jason.errorUsername) {
-                         $('#errorusuario3').show();
-                     }else{
-                         $('#errorusuario3').hide();
-
-                     }
-
+              
+                     
+                    
                      
 
-                     
+                });//aqui termina click.()validar
 
-                    });
+             });//aqui termina (document).ready
 
-                     });
-
-                });
+               
 
          
 
